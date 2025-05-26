@@ -1,1 +1,0 @@
-No Content: webpack://eyeo/vendor/webextension-polyfill/src/browser-polyfill.js
