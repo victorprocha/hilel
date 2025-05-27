@@ -9534,8 +9534,7 @@ button.close {
     opacity: .9
 }
 
-c
-}
+
 
 .carousel-control .glyphicon-chevron-right,
 .carousel-control .icon-next {
@@ -10086,9 +10085,7 @@ c
 
 /* Slider */
 
-.slick-loading .slick-list {
-    /* background: #fff url('./ajax-loader.gif') center center no-repeat; */
-}
+
 
 /* Icons */
 

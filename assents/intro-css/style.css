@@ -152,9 +152,6 @@ body {
     line-height: 170%;
 }
 
-body {
-    /* line-height: 1; */
-}
 
 article,
 aside,
@@ -348,9 +345,7 @@ section {
     padding: 0;
 }
 
-section#three-step-method {
-    margin: 0 auto 60px auto;
-}
+
 
 section.section-parallax {
     margin: 0;
@@ -771,7 +766,7 @@ h2.section-subheading.light span:before {
     -ms-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    border: 100px solid #000;
+    border:none;
     z-index: 1;
 }
 
@@ -782,7 +777,7 @@ h2.section-subheading.light span:before {
         -ms-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        border: 50px solid #000;
+        border: none;
     }
 }
 
@@ -835,92 +830,6 @@ h2.section-subheading.light span:before {
     transform: scale(1, 1);
 }
 
-/* 16. three step method */
-
-.three-step-method-heading {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 3px 0 15px 0;
-    text-align: left;
-    color: #000;
-}
-
-.three-step-method-number {
-    position: absolute;
-    top: 0;
-    font-family: "Montserrat", sans-serif;
-    font-size: 140px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -0.04em;
-    color: rgba(0, 0, 0, .45);
-    z-index: -1;
-}
-
-#three-step-method p {
-    padding-left: 100px;
-    text-align: left;
-}
-
-@media only screen and (max-width: 880px) {
-    .three-step-method-number {
-        font-size: 100px;
-    }
-}
-
-.three-step-method-block {
-    top: -8px;
-    margin-bottom: -26px;
-}
-
-@media all and (min-width: 1920px) {
-    .three-step-method-block {
-        top: -8px;
-        margin-bottom: -26px;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .three-step-method-block {
-        top: -8px;
-        margin-bottom: -50px;
-    }
-}
-
-@media only screen and (max-width: 995px) {
-    .three-step-method-block {
-        top: -8px;
-        margin-bottom: -44px;
-    }
-    .three-step-method-block.middle {
-        margin: 100px 0 60px 0;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    .three-step-method-block {
-        top: -8px;
-        margin-bottom: -46px;
-    }
-    .three-step-method-block.middle {
-        margin: 100px 0 60px 0;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .three-step-method-block {
-        top: -8px;
-        margin-bottom: -68px;
-    }
-    .three-step-method-block.middle {
-        margin: 130px 0 60px 0;
-    }
-}
-
-/* 17. fullwidth IMG */
 
 .img-fullwidth-wrapper {
     position: relative;
