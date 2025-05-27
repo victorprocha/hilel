@@ -97,8 +97,6 @@ $(function() {
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
-        prevArrow: "<i class='slick-prev icon ion-chevron-left'></i>",
-        nextArrow: "<i class='slick-next icon ion-chevron-right'></i>",
         fade: false,
         autoplay: true,
         autoplaySpeed: 4000,
