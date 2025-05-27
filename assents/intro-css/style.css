@@ -55,27 +55,7 @@
     background-image: url(/assents/image/background/BANNER.jpg);
 }
 
-/*
-@media only screen and (max-width: 995px) {
-  .bg-img-SINGLE {
-    background-image: url(../intro-images/img/background/BANNER-mobile.jpg);
-  }
-}
-*/
 
-/* 1.2. benefits IMG BACKGROUND */
-
-.img-fullwidth-benefits-carousel-1 {
-    background-image: url(../intro-images/img/benefits/);
-}
-
-/* 1.3. parallax IMG BACKGROUND */
-
-.parallax-purchase {
-    background-image: url(../intro-images/img/parallax/parallax-purchase.jpg);
-}
-
-/* 2. reset */
 
 html,
 body,
