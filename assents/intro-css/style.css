@@ -758,9 +758,10 @@ h2.section-subheading.light span:before {
 }
 
 .parallax-purchase {
+    background-image: url('/assents/image/hero/1.jpg');
     position: relative;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
@@ -783,7 +784,7 @@ h2.section-subheading.light span:before {
 
 @media only screen and (max-width: 640px) {
     .parallax-purchase {
-        border: 25px solid #000;
+        border: none;
     }
 }
 
