@@ -3188,59 +3188,9 @@
 
     function s() {
         this._curInst = null, this._keyEvent = !1, this._disabledInputs = [], this._datepickerShowing = !1, this._inDialog = !1, this._mainDivId = "ui-datepicker-div", this._inlineClass = "ui-datepicker-inline", this._appendClass = "ui-datepicker-append", this._triggerClass = "ui-datepicker-trigger", this._dialogClass = "ui-datepicker-dialog", this._disableClass = "ui-datepicker-disabled", this._unselectableClass = "ui-datepicker-unselectable", this._currentClass = "ui-datepicker-current-day", this._dayOverClass = "ui-datepicker-days-cell-over", this.regional = [], this.regional[""] = {
-            closeText: "Done",
-            prevText: "Prev",
-            nextText: "Next",
-            currentText: "Today",
-            monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
             weekHeader: "Wk",
-            dateFormat: "mm/dd/yy",
-            firstDay: 0,
-            isRTL: !1,
-            showMonthAfterYear: !1,
-            yearSuffix: ""
         }, this._defaults = {
-            showOn: "focus",
-            showAnim: "fadeIn",
-            showOptions: {},
-            defaultDate: null,
-            appendText: "",
-            buttonText: "...",
-            buttonImage: "",
-            buttonImageOnly: !1,
-            hideIfNoPrevNext: !1,
-            navigationAsDateFormat: !1,
-            gotoCurrent: !1,
-            changeMonth: !1,
-            changeYear: !1,
-            yearRange: "c-10:c+10",
-            showOtherMonths: !1,
-            selectOtherMonths: !1,
-            showWeek: !1,
-            calculateWeek: this.iso8601Week,
-            shortYearCutoff: "+10",
-            minDate: null,
-            maxDate: null,
             duration: "fast",
-            beforeShowDay: null,
-            beforeShow: null,
-            onSelect: null,
-            onChangeMonthYear: null,
-            onClose: null,
-            numberOfMonths: 1,
-            showCurrentAtPos: 0,
-            stepMonths: 1,
-            stepBigMonths: 12,
-            altField: "",
-            altFormat: "",
-            constrainInput: !0,
-            showButtonPanel: !1,
-            autoSize: !1,
-            disabled: !1
         }, t.extend(this._defaults, this.regional[""]), this.regional.en = t.extend(!0, {}, this.regional[""]), this.regional["en-US"] = t.extend(!0, {}, this.regional.en), this.dpDiv = n(t("<div id='" + this._mainDivId + "' class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>"))
     }
 
@@ -5225,119 +5175,6 @@
                 tabIndex: -1,
                 role: this._itemRole()
             }), this._addClass(n, "ui-menu-item")._addClass(o, "ui-menu-item-wrapper"), i.filter(".ui-state-disabled").attr("aria-disabled", "true"), this.active && !t.contains(this.element[0], this.active[0]) && this.blur()
-        },
-        _itemRole: function() {
-            return {
-                menu: "menuitem",
-                listbox: "option"
-            }[this.options.role]
-        },
-        _setOption: function(t, e) {
-            if ("icons" === t) {
-                var i = this.element.find(".ui-menu-icon");
-                this._removeClass(i, null, this.options.icons.submenu)._addClass(i, null, e.submenu)
-            }
-            this._super(t, e)
-        },
-        _setOptionDisabled: function(t) {
-            this._super(t), this.element.attr("aria-disabled", t + ""), this._toggleClass(null, "ui-state-disabled", !!t)
-        },
-        focus: function(t, e) {
-            var i, s, n;
-            this.blur(t, t && "focus" === t.type), this._scrollIntoView(e), this.active = e.first(), s = this.active.children(".ui-menu-item-wrapper"), this._addClass(s, null, "ui-state-active"), this.options.role && this.element.attr("aria-activedescendant", s.attr("id")), n = this.active.parent().closest(".ui-menu-item").children(".ui-menu-item-wrapper"), this._addClass(n, null, "ui-state-active"), t && "keydown" === t.type ? this._close() : this.timer = this._delay(function() {
-                this._close()
-            }, this.delay), i = e.children(".ui-menu"), i.length && t && /^mouse/.test(t.type) && this._startOpening(i), this.activeMenu = e.parent(), this._trigger("focus", t, {
-                item: e
-            })
-        },
-        _scrollIntoView: function(e) {
-            var i, s, n, o, a, r;
-            this._hasScroll() && (i = parseFloat(t.css(this.activeMenu[0], "borderTopWidth")) || 0, s = parseFloat(t.css(this.activeMenu[0], "paddingTop")) || 0, n = e.offset().top - this.activeMenu.offset().top - i - s, o = this.activeMenu.scrollTop(), a = this.activeMenu.height(), r = e.outerHeight(), 0 > n ? this.activeMenu.scrollTop(o + n) : n + r > a && this.activeMenu.scrollTop(o + n - a + r))
-        },
-        blur: function(t, e) {
-            e || clearTimeout(this.timer), this.active && (this._removeClass(this.active.children(".ui-menu-item-wrapper"), null, "ui-state-active"), this._trigger("blur", t, {
-                item: this.active
-            }), this.active = null)
-        },
-        _startOpening: function(t) {
-            clearTimeout(this.timer), "true" === t.attr("aria-hidden") && (this.timer = this._delay(function() {
-                this._close(), this._open(t)
-            }, this.delay))
-        },
-        _open: function(e) {
-            var i = t.extend({ of: this.active
-            }, this.options.position);
-            clearTimeout(this.timer), this.element.find(".ui-menu").not(e.parents(".ui-menu")).hide().attr("aria-hidden", "true"), e.show().removeAttr("aria-hidden").attr("aria-expanded", "true").position(i)
-        },
-        collapseAll: function(e, i) {
-            clearTimeout(this.timer), this.timer = this._delay(function() {
-                var s = i ? this.element : t(e && e.target).closest(this.element.find(".ui-menu"));
-                s.length || (s = this.element), this._close(s), this.blur(e), this._removeClass(s.find(".ui-state-active"), null, "ui-state-active"), this.activeMenu = s
-            }, this.delay)
-        },
-        _close: function(t) {
-            t || (t = this.active ? this.active.parent() : this.element), t.find(".ui-menu").hide().attr("aria-hidden", "true").attr("aria-expanded", "false")
-        },
-        _closeOnDocumentClick: function(e) {
-            return !t(e.target).closest(".ui-menu").length
-        },
-        _isDivider: function(t) {
-            return !/[^\-\u2014\u2013\s]/.test(t.text())
-        },
-        collapse: function(t) {
-            var e = this.active && this.active.parent().closest(".ui-menu-item", this.element);
-            e && e.length && (this._close(), this.focus(t, e))
-        },
-        expand: function(t) {
-            var e = this.active && this.active.children(".ui-menu ").find(this.options.items).first();
-            e && e.length && (this._open(e.parent()), this._delay(function() {
-                this.focus(t, e)
-            }))
-        },
-        next: function(t) {
-            this._move("next", "first", t)
-        },
-        previous: function(t) {
-            this._move("prev", "last", t)
-        },
-        isFirstItem: function() {
-            return this.active && !this.active.prevAll(".ui-menu-item").length
-        },
-        isLastItem: function() {
-            return this.active && !this.active.nextAll(".ui-menu-item").length
-        },
-        _move: function(t, e, i) {
-            var s;
-            this.active && (s = "first" === t || "last" === t ? this.active["first" === t ? "prevAll" : "nextAll"](".ui-menu-item").eq(-1) : this.active[t + "All"](".ui-menu-item").eq(0)), s && s.length && this.active || (s = this.activeMenu.find(this.options.items)[e]()), this.focus(i, s)
-        },
-        nextPage: function(e) {
-            var i, s, n;
-            return this.active ? (this.isLastItem() || (this._hasScroll() ? (s = this.active.offset().top, n = this.element.height(), this.active.nextAll(".ui-menu-item").each(function() {
-                return i = t(this), 0 > i.offset().top - s - n
-            }), this.focus(e, i)) : this.focus(e, this.activeMenu.find(this.options.items)[this.active ? "last" : "first"]())), void 0) : (this.next(e), void 0)
-        },
-        previousPage: function(e) {
-            var i, s, n;
-            return this.active ? (this.isFirstItem() || (this._hasScroll() ? (s = this.active.offset().top, n = this.element.height(), this.active.prevAll(".ui-menu-item").each(function() {
-                return i = t(this), i.offset().top - s + n > 0
-            }), this.focus(e, i)) : this.focus(e, this.activeMenu.find(this.options.items).first())), void 0) : (this.next(e), void 0)
-        },
-        _hasScroll: function() {
-            return this.element.outerHeight() < this.element.prop("scrollHeight")
-        },
-        select: function(e) {
-            this.active = this.active || t(e.target).closest(".ui-menu-item");
-            var i = {
-                item: this.active
-            };
-            this.active.has(".ui-menu").length || this.collapseAll(e, !0), this._trigger("select", e, i)
-        },
-        _filterMenuItems: function(e) {
-            var i = e.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&"),
-                s = RegExp("^" + i, "i");
-            return this.activeMenu.find(this.options.items).filter(".ui-menu-item").filter(function() {
-                return s.test(t.trim(t(this).children(".ui-menu-item-wrapper").text()))
-            })
         }
     }), t.widget("ui.autocomplete", {
         version: "1.12.1",
@@ -5461,153 +5298,7 @@
                 }
             })
         },
-        _destroy: function() {
-            clearTimeout(this.searching), this.element.removeAttr("autocomplete"), this.menu.element.remove(), this.liveRegion.remove()
-        },
-        _setOption: function(t, e) {
-            this._super(t, e), "source" === t && this._initSource(), "appendTo" === t && this.menu.element.appendTo(this._appendTo()), "disabled" === t && e && this.xhr && this.xhr.abort()
-        },
-        _isEventTargetInWidget: function(e) {
-            var i = this.menu.element[0];
-            return e.target === this.element[0] || e.target === i || t.contains(i, e.target)
-        },
-        _closeOnClickOutside: function(t) {
-            this._isEventTargetInWidget(t) || this.close()
-        },
-        _appendTo: function() {
-            var e = this.options.appendTo;
-            return e && (e = e.jquery || e.nodeType ? t(e) : this.document.find(e).eq(0)), e && e[0] || (e = this.element.closest(".ui-front, dialog")), e.length || (e = this.document[0].body), e
-        },
-        _initSource: function() {
-            var e, i, s = this;
-            t.isArray(this.options.source) ? (e = this.options.source, this.source = function(i, s) {
-                s(t.ui.autocomplete.filter(e, i.term))
-            }) : "string" == typeof this.options.source ? (i = this.options.source, this.source = function(e, n) {
-                s.xhr && s.xhr.abort(), s.xhr = t.ajax({
-                    url: i,
-                    data: e,
-                    dataType: "json",
-                    success: function(t) {
-                        n(t)
-                    },
-                    error: function() {
-                        n([])
-                    }
-                })
-            }) : this.source = this.options.source
-        },
-        _searchTimeout: function(t) {
-            clearTimeout(this.searching), this.searching = this._delay(function() {
-                var e = this.term === this._value(),
-                    i = this.menu.element.is(":visible"),
-                    s = t.altKey || t.ctrlKey || t.metaKey || t.shiftKey;
-                (!e || e && !i && !s) && (this.selectedItem = null, this.search(null, t))
-            }, this.options.delay)
-        },
-        search: function(t, e) {
-            return t = null != t ? t : this._value(), this.term = this._value(), t.length < this.options.minLength ? this.close(e) : this._trigger("search", e) !== !1 ? this._search(t) : void 0
-        },
-        _search: function(t) {
-            this.pending++, this._addClass("ui-autocomplete-loading"), this.cancelSearch = !1, this.source({
-                term: t
-            }, this._response())
-        },
-        _response: function() {
-            var e = ++this.requestIndex;
-            return t.proxy(function(t) {
-                e === this.requestIndex && this.__response(t), this.pending--, this.pending || this._removeClass("ui-autocomplete-loading")
-            }, this)
-        },
-        __response: function(t) {
-            t && (t = this._normalize(t)), this._trigger("response", null, {
-                content: t
-            }), !this.options.disabled && t && t.length && !this.cancelSearch ? (this._suggest(t), this._trigger("open")) : this._close()
-        },
-        close: function(t) {
-            this.cancelSearch = !0, this._close(t)
-        },
-        _close: function(t) {
-            this._off(this.document, "mousedown"), this.menu.element.is(":visible") && (this.menu.element.hide(), this.menu.blur(), this.isNewMenu = !0, this._trigger("close", t))
-        },
-        _change: function(t) {
-            this.previous !== this._value() && this._trigger("change", t, {
-                item: this.selectedItem
-            })
-        },
-        _normalize: function(e) {
-            return e.length && e[0].label && e[0].value ? e : t.map(e, function(e) {
-                return "string" == typeof e ? {
-                    label: e,
-                    value: e
-                } : t.extend({}, e, {
-                    label: e.label || e.value,
-                    value: e.value || e.label
-                })
-            })
-        },
-        _suggest: function(e) {
-            var i = this.menu.element.empty();
-            this._renderMenu(i, e), this.isNewMenu = !0, this.menu.refresh(), i.show(), this._resizeMenu(), i.position(t.extend({ of: this.element
-            }, this.options.position)), this.options.autoFocus && this.menu.next(), this._on(this.document, {
-                mousedown: "_closeOnClickOutside"
-            })
-        },
-        _resizeMenu: function() {
-            var t = this.menu.element;
-            t.outerWidth(Math.max(t.width("").outerWidth() + 1, this.element.outerWidth()))
-        },
-        _renderMenu: function(e, i) {
-            var s = this;
-            t.each(i, function(t, i) {
-                s._renderItemData(e, i)
-            })
-        },
-        _renderItemData: function(t, e) {
-            return this._renderItem(t, e).data("ui-autocomplete-item", e)
-        },
-        _renderItem: function(e, i) {
-            return t("<li>").append(t("<div>").text(i.label)).appendTo(e)
-        },
-        _move: function(t, e) {
-            return this.menu.element.is(":visible") ? this.menu.isFirstItem() && /^previous/.test(t) || this.menu.isLastItem() && /^next/.test(t) ? (this.isMultiLine || this._value(this.term), this.menu.blur(), void 0) : (this.menu[t](e), void 0) : (this.search(null, e), void 0)
-        },
-        widget: function() {
-            return this.menu.element
-        },
-        _value: function() {
-            return this.valueMethod.apply(this.element, arguments)
-        },
-        _keyEvent: function(t, e) {
-            (!this.isMultiLine || this.menu.element.is(":visible")) && (this._move(t, e), e.preventDefault())
-        },
-        _isContentEditable: function(t) {
-            if (!t.length) return !1;
-            var e = t.prop("contentEditable");
-            return "inherit" === e ? this._isContentEditable(t.parent()) : "true" === e
-        }
-    }), t.extend(t.ui.autocomplete, {
-        escapeRegex: function(t) {
-            return t.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
-        },
-        filter: function(e, i) {
-            var s = RegExp(t.ui.autocomplete.escapeRegex(i), "i");
-            return t.grep(e, function(t) {
-                return s.test(t.label || t.value || t)
-            })
-        }
-    }), t.widget("ui.autocomplete", t.ui.autocomplete, {
-        options: {
-            messages: {
-                noResults: "No search results.",
-                results: function(t) {
-                    return t + (t > 1 ? " results are" : " result is") + " available, use up and down arrow keys to navigate."
-                }
-            }
-        },
-        __response: function(e) {
-            var i;
-            this._superApply(arguments), this.options.disabled || this.cancelSearch || (i = e && e.length ? this.options.messages.results(e.length) : this.options.messages.noResults, this.liveRegion.children().hide(), t("<div>").text(i).appendTo(this.liveRegion))
-        }
+        
     }), t.ui.autocomplete;
     var g = /ui-corner-([a-z]){2,6}/g;
     t.widget("ui.controlgroup", {
@@ -8045,18 +7736,6 @@
         options: {
             hoverClass: !1,
             activeClass: !1
-        },
-        _addActiveClass: function() {
-            this._super(), this.options.activeClass && this.element.addClass(this.options.activeClass)
-        },
-        _removeActiveClass: function() {
-            this._super(), this.options.activeClass && this.element.removeClass(this.options.activeClass)
-        },
-        _addHoverClass: function() {
-            this._super(), this.options.hoverClass && this.element.addClass(this.options.hoverClass)
-        },
-        _removeHoverClass: function() {
-            this._super(), this.options.hoverClass && this.element.removeClass(this.options.hoverClass)
         }
     }), t.ui.droppable, t.widget("ui.progressbar", {
         version: "1.12.1",
@@ -8077,36 +7756,6 @@
                 role: "progressbar",
                 "aria-valuemin": this.min
             }), this._addClass("ui-progressbar", "ui-widget ui-widget-content"), this.valueDiv = t("<div>").appendTo(this.element), this._addClass(this.valueDiv, "ui-progressbar-value", "ui-widget-header"), this._refreshValue()
-        },
-        _destroy: function() {
-            this.element.removeAttr("role aria-valuemin aria-valuemax aria-valuenow"), this.valueDiv.remove()
-        },
-        value: function(t) {
-            return void 0 === t ? this.options.value : (this.options.value = this._constrainedValue(t), this._refreshValue(), void 0)
-        },
-        _constrainedValue: function(t) {
-            return void 0 === t && (t = this.options.value), this.indeterminate = t === !1, "number" != typeof t && (t = 0), this.indeterminate ? !1 : Math.min(this.options.max, Math.max(this.min, t))
-        },
-        _setOptions: function(t) {
-            var e = t.value;
-            delete t.value, this._super(t), this.options.value = this._constrainedValue(e), this._refreshValue()
-        },
-        _setOption: function(t, e) {
-            "max" === t && (e = Math.max(this.min, e)), this._super(t, e)
-        },
-        _setOptionDisabled: function(t) {
-            this._super(t), this.element.attr("aria-disabled", t), this._toggleClass(null, "ui-state-disabled", !!t)
-        },
-        _percentage: function() {
-            return this.indeterminate ? 100 : 100 * (this.options.value - this.min) / (this.options.max - this.min)
-        },
-        _refreshValue: function() {
-            var e = this.options.value,
-                i = this._percentage();
-            this.valueDiv.toggle(this.indeterminate || e > this.min).width(i.toFixed(0) + "%"), this._toggleClass(this.valueDiv, "ui-progressbar-complete", null, e === this.options.max)._toggleClass("ui-progressbar-indeterminate", null, this.indeterminate), this.indeterminate ? (this.element.removeAttr("aria-valuenow"), this.overlayDiv || (this.overlayDiv = t("<div>").appendTo(this.valueDiv), this._addClass(this.overlayDiv, "ui-progressbar-overlay"))) : (this.element.attr({
-                "aria-valuemax": this.options.max,
-                "aria-valuenow": e
-            }), this.overlayDiv && (this.overlayDiv.remove(), this.overlayDiv = null)), this.oldValue !== e && (this.oldValue = e, this._trigger("change")), e === this.options.max && this._trigger("complete")
         }
     }), t.widget("ui.selectable", t.ui.mouse, {
         version: "1.12.1",
@@ -8151,55 +7800,7 @@
         _destroy: function() {
             this.selectees.removeData("selectable-item"), this._mouseDestroy()
         },
-        _mouseStart: function(e) {
-            var i = this,
-                s = this.options;
-            this.opos = [e.pageX, e.pageY], this.elementPos = t(this.element[0]).offset(), this.options.disabled || (this.selectees = t(s.filter, this.element[0]), this._trigger("start", e), t(s.appendTo).append(this.helper), this.helper.css({
-                left: e.pageX,
-                top: e.pageY,
-                width: 0,
-                height: 0
-            }), s.autoRefresh && this.refresh(), this.selectees.filter(".ui-selected").each(function() {
-                var s = t.data(this, "selectable-item");
-                s.startselected = !0, e.metaKey || e.ctrlKey || (i._removeClass(s.$element, "ui-selected"), s.selected = !1, i._addClass(s.$element, "ui-unselecting"), s.unselecting = !0, i._trigger("unselecting", e, {
-                    unselecting: s.element
-                }))
-            }), t(e.target).parents().addBack().each(function() {
-                var s, n = t.data(this, "selectable-item");
-                return n ? (s = !e.metaKey && !e.ctrlKey || !n.$element.hasClass("ui-selected"), i._removeClass(n.$element, s ? "ui-unselecting" : "ui-selected")._addClass(n.$element, s ? "ui-selecting" : "ui-unselecting"), n.unselecting = !s, n.selecting = s, n.selected = s, s ? i._trigger("selecting", e, {
-                    selecting: n.element
-                }) : i._trigger("unselecting", e, {
-                    unselecting: n.element
-                }), !1) : void 0
-            }))
-        },
-        _mouseDrag: function(e) {
-            if (this.dragged = !0, !this.options.disabled) {
-                var i, s = this,
-                    n = this.options,
-                    o = this.opos[0],
-                    a = this.opos[1],
-                    r = e.pageX,
-                    h = e.pageY;
-                return o > r && (i = r, r = o, o = i), a > h && (i = h, h = a, a = i), this.helper.css({
-                    left: o,
-                    top: a,
-                    width: r - o,
-                    height: h - a
-                }), this.selectees.each(function() {
-                    var i = t.data(this, "selectable-item"),
-                        l = !1,
-                        c = {};
-                    i && i.element !== s.element[0] && (c.left = i.left + s.elementPos.left, c.right = i.right + s.elementPos.left, c.top = i.top + s.elementPos.top, c.bottom = i.bottom + s.elementPos.top, "touch" === n.tolerance ? l = !(c.left > r || o > c.right || c.top > h || a > c.bottom) : "fit" === n.tolerance && (l = c.left > o && r > c.right && c.top > a && h > c.bottom), l ? (i.selected && (s._removeClass(i.$element, "ui-selected"), i.selected = !1), i.unselecting && (s._removeClass(i.$element, "ui-unselecting"), i.unselecting = !1), i.selecting || (s._addClass(i.$element, "ui-selecting"), i.selecting = !0, s._trigger("selecting", e, {
-                        selecting: i.element
-                    }))) : (i.selecting && ((e.metaKey || e.ctrlKey) && i.startselected ? (s._removeClass(i.$element, "ui-selecting"), i.selecting = !1, s._addClass(i.$element, "ui-selected"), i.selected = !0) : (s._removeClass(i.$element, "ui-selecting"), i.selecting = !1, i.startselected && (s._addClass(i.$element, "ui-unselecting"), i.unselecting = !0), s._trigger("unselecting", e, {
-                        unselecting: i.element
-                    }))), i.selected && (e.metaKey || e.ctrlKey || i.startselected || (s._removeClass(i.$element, "ui-selected"), i.selected = !1, s._addClass(i.$element, "ui-unselecting"), i.unselecting = !0, s._trigger("unselecting", e, {
-                        unselecting: i.element
-                    })))))
-                }), !1
-            }
-        },
+        
         _mouseStop: function(e) {
             var i = this;
             return this.dragged = !1, t(".ui-unselecting", this.element[0]).each(function() {
@@ -8876,20 +8477,6 @@
                 } else this._clear(e, i);
                 return !1
             }
-        },
-        cancel: function() {
-            if (this.dragging) {
-                this._mouseUp(new t.Event("mouseup", {
-                    target: null
-                })), "original" === this.options.helper ? (this.currentItem.css(this._storedCSS), this._removeClass(this.currentItem, "ui-sortable-helper")) : this.currentItem.show();
-                for (var e = this.containers.length - 1; e >= 0; e--) this.containers[e]._trigger("deactivate", null, this._uiHash(this)), this.containers[e].containerCache.over && (this.containers[e]._trigger("out", null, this._uiHash(this)), this.containers[e].containerCache.over = 0)
-            }
-            return this.placeholder && (this.placeholder[0].parentNode && this.placeholder[0].parentNode.removeChild(this.placeholder[0]), "original" !== this.options.helper && this.helper && this.helper[0].parentNode && this.helper.remove(), t.extend(this, {
-                helper: null,
-                dragging: !1,
-                reverting: !1,
-                _noFinalSort: null
-            }), this.domPosition.prev ? t(this.domPosition.prev).after(this.currentItem) : t(this.domPosition.parent).prepend(this.currentItem)), this
         },
         serialize: function(e) {
             var i = this._getItemsAsjQuery(e && e.connected),
@@ -10823,151 +10410,7 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 }(jQuery), + function(a) {
     "use strict";
 
-    function b(b) {
-        return this.each(function() {
-            var d = a(this),
-                e = d.data("bs.button"),
-                f = "object" == typeof b && b;
-            e || d.data("bs.button", e = new c(this, f)), "toggle" == b ? e.toggle() : b && e.setState(b)
-        })
-    }
-    var c = function(b, d) {
-        this.$element = a(b), this.options = a.extend({}, c.DEFAULTS, d), this.isLoading = !1
-    };
-    c.VERSION = "3.3.7", c.DEFAULTS = {
-        loadingText: "loading..."
-    }, c.prototype.setState = function(b) {
-        var c = "disabled",
-            d = this.$element,
-            e = d.is("input") ? "val" : "html",
-            f = d.data();
-        b += "Text", null == f.resetText && d.data("resetText", d[e]()), setTimeout(a.proxy(function() {
-            d[e](null == f[b] ? this.options[b] : f[b]), "loadingText" == b ? (this.isLoading = !0, d.addClass(c).attr(c, c).prop(c, !0)) : this.isLoading && (this.isLoading = !1, d.removeClass(c).removeAttr(c).prop(c, !1))
-        }, this), 0)
-    }, c.prototype.toggle = function() {
-        var a = !0,
-            b = this.$element.closest('[data-toggle="buttons"]');
-        if (b.length) {
-            var c = this.$element.find("input");
-            "radio" == c.prop("type") ? (c.prop("checked") && (a = !1), b.find(".active").removeClass("active"), this.$element.addClass("active")) : "checkbox" == c.prop("type") && (c.prop("checked") !== this.$element.hasClass("active") && (a = !1), this.$element.toggleClass("active")), c.prop("checked", this.$element.hasClass("active")), a && c.trigger("change")
-        } else this.$element.attr("aria-pressed", !this.$element.hasClass("active")), this.$element.toggleClass("active")
-    };
-    var d = a.fn.button;
-    a.fn.button = b, a.fn.button.Constructor = c, a.fn.button.noConflict = function() {
-        return a.fn.button = d, this
-    }, a(document).on("click.bs.button.data-api", '[data-toggle^="button"]', function(c) {
-        var d = a(c.target).closest(".btn");
-        b.call(d, "toggle"), a(c.target).is('input[type="radio"], input[type="checkbox"]') || (c.preventDefault(), d.is("input,button") ? d.trigger("focus") : d.find("input:visible,button:visible").first().trigger("focus"))
-    }).on("focus.bs.button.data-api blur.bs.button.data-api", '[data-toggle^="button"]', function(b) {
-        a(b.target).closest(".btn").toggleClass("focus", /^focus(in)?$/.test(b.type))
-    })
-}(jQuery), + function(a) {
-    "use strict";
 
-    function b(b) {
-        return this.each(function() {
-            var d = a(this),
-                e = d.data("bs.carousel"),
-                f = a.extend({}, c.DEFAULTS, d.data(), "object" == typeof b && b),
-                g = "string" == typeof b ? b : f.slide;
-            e || d.data("bs.carousel", e = new c(this, f)), "number" == typeof b ? e.to(b) : g ? e[g]() : f.interval && e.pause().cycle()
-        })
-    }
-    var c = function(b, c) {
-        this.$element = a(b), this.$indicators = this.$element.find(".carousel-indicators"), this.options = c, this.paused = null, this.sliding = null, this.interval = null, this.$active = null, this.$items = null, this.options.keyboard && this.$element.on("keydown.bs.carousel", a.proxy(this.keydown, this)), "hover" == this.options.pause && !("ontouchstart" in document.documentElement) && this.$element.on("mouseenter.bs.carousel", a.proxy(this.pause, this)).on("mouseleave.bs.carousel", a.proxy(this.cycle, this))
-    };
-    c.VERSION = "3.3.7", c.TRANSITION_DURATION = 600, c.DEFAULTS = {
-        interval: 5e3,
-        pause: "hover",
-        wrap: !0,
-        keyboard: !0
-    }, c.prototype.keydown = function(a) {
-        if (!/input|textarea/i.test(a.target.tagName)) {
-            switch (a.which) {
-                case 37:
-                    this.prev();
-                    break;
-                case 39:
-                    this.next();
-                    break;
-                default:
-                    return
-            }
-            a.preventDefault()
-        }
-    }, c.prototype.cycle = function(b) {
-        return b || (this.paused = !1), this.interval && clearInterval(this.interval), this.options.interval && !this.paused && (this.interval = setInterval(a.proxy(this.next, this), this.options.interval)), this
-    }, c.prototype.getItemIndex = function(a) {
-        return this.$items = a.parent().children(".item"), this.$items.index(a || this.$active)
-    }, c.prototype.getItemForDirection = function(a, b) {
-        var c = this.getItemIndex(b),
-            d = "prev" == a && 0 === c || "next" == a && c == this.$items.length - 1;
-        if (d && !this.options.wrap) return b;
-        var e = "prev" == a ? -1 : 1,
-            f = (c + e) % this.$items.length;
-        return this.$items.eq(f)
-    }, c.prototype.to = function(a) {
-        var b = this,
-            c = this.getItemIndex(this.$active = this.$element.find(".item.active"));
-        if (!(a > this.$items.length - 1 || a < 0)) return this.sliding ? this.$element.one("slid.bs.carousel", function() {
-            b.to(a)
-        }) : c == a ? this.pause().cycle() : this.slide(a > c ? "next" : "prev", this.$items.eq(a))
-    }, c.prototype.pause = function(b) {
-        return b || (this.paused = !0), this.$element.find(".next, .prev").length && a.support.transition && (this.$element.trigger(a.support.transition.end), this.cycle(!0)), this.interval = clearInterval(this.interval), this
-    }, c.prototype.next = function() {
-        if (!this.sliding) return this.slide("next")
-    }, c.prototype.prev = function() {
-        if (!this.sliding) return this.slide("prev")
-    }, c.prototype.slide = function(b, d) {
-        var e = this.$element.find(".item.active"),
-            f = d || this.getItemForDirection(b, e),
-            g = this.interval,
-            h = "next" == b ? "left" : "right",
-            i = this;
-        if (f.hasClass("active")) return this.sliding = !1;
-        var j = f[0],
-            k = a.Event("slide.bs.carousel", {
-                relatedTarget: j,
-                direction: h
-            });
-        if (this.$element.trigger(k), !k.isDefaultPrevented()) {
-            if (this.sliding = !0, g && this.pause(), this.$indicators.length) {
-                this.$indicators.find(".active").removeClass("active");
-                var l = a(this.$indicators.children()[this.getItemIndex(f)]);
-                l && l.addClass("active")
-            }
-            var m = a.Event("slid.bs.carousel", {
-                relatedTarget: j,
-                direction: h
-            });
-            return a.support.transition && this.$element.hasClass("slide") ? (f.addClass(b), f[0].offsetWidth, e.addClass(h), f.addClass(h), e.one("bsTransitionEnd", function() {
-                f.removeClass([b, h].join(" ")).addClass("active"), e.removeClass(["active", h].join(" ")), i.sliding = !1, setTimeout(function() {
-                    i.$element.trigger(m)
-                }, 0)
-            }).emulateTransitionEnd(c.TRANSITION_DURATION)) : (e.removeClass("active"), f.addClass("active"), this.sliding = !1, this.$element.trigger(m)), g && this.cycle(), this
-        }
-    };
-    var d = a.fn.carousel;
-    a.fn.carousel = b, a.fn.carousel.Constructor = c, a.fn.carousel.noConflict = function() {
-        return a.fn.carousel = d, this
-    };
-    var e = function(c) {
-        var d, e = a(this),
-            f = a(e.attr("data-target") || (d = e.attr("href")) && d.replace(/.*(?=#[^\s]+$)/, ""));
-        if (f.hasClass("carousel")) {
-            var g = a.extend({}, f.data(), e.data()),
-                h = e.attr("data-slide-to");
-            h && (g.interval = !1), b.call(f, g), h && f.data("bs.carousel").to(h), c.preventDefault()
-        }
-    };
-    a(document).on("click.bs.carousel.data-api", "[data-slide]", e).on("click.bs.carousel.data-api", "[data-slide-to]", e), a(window).on("load", function() {
-        a('[data-ride="carousel"]').each(function() {
-            var c = a(this);
-            b.call(c, c.data())
-        })
-    })
-}(jQuery), + function(a) {
-    "use strict";
 
     function b(b) {
         var c, d = b.attr("data-target") || (c = b.attr("href")) && c.replace(/.*(?=#[^\s]+$)/, "");
@@ -11045,13 +10488,7 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 }(jQuery), + function(a) {
     "use strict";
 
-    function b(b) {
-        var c = b.attr("data-target");
-        c || (c = b.attr("href"), c = c && /#[A-Za-z]/.test(c) && c.replace(/.*(?=#[^\s]*$)/, ""));
-        var d = c && a(c);
-        return d && d.length ? d : b.parent()
-    }
-
+ 
     function c(c) {
         c && 3 === c.which || (a(e).remove(), a(f).each(function() {
             var d = a(this),
@@ -11235,7 +10672,6 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
             })
         }), b.call(f, g, this)
     })
-}(jQuery), + function(a) {
     "use strict";
 
     function b(b) {
@@ -11470,7 +10906,7 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
     a.fn.tooltip = b, a.fn.tooltip.Constructor = c, a.fn.tooltip.noConflict = function() {
         return a.fn.tooltip = d, this
     }
-}(jQuery), + function(a) {
+}(jQuery); + function(a) {
     "use strict";
 
     function b(b) {
@@ -11510,7 +10946,7 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
     a.fn.popover = b, a.fn.popover.Constructor = c, a.fn.popover.noConflict = function() {
         return a.fn.popover = d, this
     }
-}(jQuery), + function(a) {
+}(jQuery); + function(a) {
     "use strict";
 
     function b(c, d) {
@@ -11572,124 +11008,4 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
             c.call(b, b.data())
         })
     })
-}(jQuery), + function(a) {
-    "use strict";
-
-    function b(b) {
-        return this.each(function() {
-            var d = a(this),
-                e = d.data("bs.tab");
-            e || d.data("bs.tab", e = new c(this)), "string" == typeof b && e[b]()
-        })
-    }
-    var c = function(b) {
-        this.element = a(b)
-    };
-    c.VERSION = "3.3.7", c.TRANSITION_DURATION = 150, c.prototype.show = function() {
-        var b = this.element,
-            c = b.closest("ul:not(.dropdown-menu)"),
-            d = b.data("target");
-        if (d || (d = b.attr("href"), d = d && d.replace(/.*(?=#[^\s]*$)/, "")), !b.parent("li").hasClass("active")) {
-            var e = c.find(".active:last a"),
-                f = a.Event("hide.bs.tab", {
-                    relatedTarget: b[0]
-                }),
-                g = a.Event("show.bs.tab", {
-                    relatedTarget: e[0]
-                });
-            if (e.trigger(f), b.trigger(g), !g.isDefaultPrevented() && !f.isDefaultPrevented()) {
-                var h = a(d);
-                this.activate(b.closest("li"), c), this.activate(h, h.parent(), function() {
-                    e.trigger({
-                        type: "hidden.bs.tab",
-                        relatedTarget: b[0]
-                    }), b.trigger({
-                        type: "shown.bs.tab",
-                        relatedTarget: e[0]
-                    })
-                })
-            }
-        }
-    }, c.prototype.activate = function(b, d, e) {
-        function f() {
-            g.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded", !1), b.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded", !0), h ? (b[0].offsetWidth, b.addClass("in")) : b.removeClass("fade"), b.parent(".dropdown-menu").length && b.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded", !0), e && e()
-        }
-        var g = d.find("> .active"),
-            h = e && a.support.transition && (g.length && g.hasClass("fade") || !!d.find("> .fade").length);
-        g.length && h ? g.one("bsTransitionEnd", f).emulateTransitionEnd(c.TRANSITION_DURATION) : f(), g.removeClass("in")
-    };
-    var d = a.fn.tab;
-    a.fn.tab = b, a.fn.tab.Constructor = c, a.fn.tab.noConflict = function() {
-        return a.fn.tab = d, this
-    };
-    var e = function(c) {
-        c.preventDefault(), b.call(a(this), "show")
-    };
-    a(document).on("click.bs.tab.data-api", '[data-toggle="tab"]', e).on("click.bs.tab.data-api", '[data-toggle="pill"]', e)
-}(jQuery), + function(a) {
-    "use strict";
-
-    function b(b) {
-        return this.each(function() {
-            var d = a(this),
-                e = d.data("bs.affix"),
-                f = "object" == typeof b && b;
-            e || d.data("bs.affix", e = new c(this, f)), "string" == typeof b && e[b]()
-        })
-    }
-    var c = function(b, d) {
-        this.options = a.extend({}, c.DEFAULTS, d), this.$target = a(this.options.target).on("scroll.bs.affix.data-api", a.proxy(this.checkPosition, this)).on("click.bs.affix.data-api", a.proxy(this.checkPositionWithEventLoop, this)), this.$element = a(b), this.affixed = null, this.unpin = null, this.pinnedOffset = null, this.checkPosition()
-    };
-    c.VERSION = "3.3.7", c.RESET = "affix affix-top affix-bottom", c.DEFAULTS = {
-        offset: 0,
-        target: window
-    }, c.prototype.getState = function(a, b, c, d) {
-        var e = this.$target.scrollTop(),
-            f = this.$element.offset(),
-            g = this.$target.height();
-        if (null != c && "top" == this.affixed) return e < c && "top";
-        if ("bottom" == this.affixed) return null != c ? !(e + this.unpin <= f.top) && "bottom" : !(e + g <= a - d) && "bottom";
-        var h = null == this.affixed,
-            i = h ? e : f.top,
-            j = h ? g : b;
-        return null != c && e <= c ? "top" : null != d && i + j >= a - d && "bottom"
-    }, c.prototype.getPinnedOffset = function() {
-        if (this.pinnedOffset) return this.pinnedOffset;
-        this.$element.removeClass(c.RESET).addClass("affix");
-        var a = this.$target.scrollTop(),
-            b = this.$element.offset();
-        return this.pinnedOffset = b.top - a
-    }, c.prototype.checkPositionWithEventLoop = function() {
-        setTimeout(a.proxy(this.checkPosition, this), 1)
-    }, c.prototype.checkPosition = function() {
-        if (this.$element.is(":visible")) {
-            var b = this.$element.height(),
-                d = this.options.offset,
-                e = d.top,
-                f = d.bottom,
-                g = Math.max(a(document).height(), a(document.body).height());
-            "object" != typeof d && (f = e = d), "function" == typeof e && (e = d.top(this.$element)), "function" == typeof f && (f = d.bottom(this.$element));
-            var h = this.getState(g, b, e, f);
-            if (this.affixed != h) {
-                null != this.unpin && this.$element.css("top", "");
-                var i = "affix" + (h ? "-" + h : ""),
-                    j = a.Event(i + ".bs.affix");
-                if (this.$element.trigger(j), j.isDefaultPrevented()) return;
-                this.affixed = h, this.unpin = "bottom" == h ? this.getPinnedOffset() : null, this.$element.removeClass(c.RESET).addClass(i).trigger(i.replace("affix", "affixed") + ".bs.affix")
-            }
-            "bottom" == h && this.$element.offset({
-                top: g - b - f
-            })
-        }
-    };
-    var d = a.fn.affix;
-    a.fn.affix = b, a.fn.affix.Constructor = c, a.fn.affix.noConflict = function() {
-        return a.fn.affix = d, this
-    }, a(window).on("load", function() {
-        a('[data-spy="affix"]').each(function() {
-            var c = a(this),
-                d = c.data();
-            d.offset = d.offset || {}, null != d.offsetBottom && (d.offset.bottom = d.offsetBottom), null != d.offsetTop && (d.offset.top = d.offsetTop), b.call(c, d)
-        })
-    })
-}(jQuery);
+}(jQuery); 
